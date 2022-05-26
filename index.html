@@ -1,0 +1,35 @@
+<html lang="en">
+<head>
+
+    <title>Fight</title>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<!--Red Container div-->
+<div class="main-container" >
+<!--    Smaller red container div-->
+    <div class="health-interface">
+<!--        player health-->
+        <div class="overlay-parent" style="display: flex; justify-content: flex-end">
+            <div  class="health-bar"></div>
+            <div id="playerHealth" class="player-overlay"></div>
+        </div>
+        <!--        Timer-->
+        <div id="timer" class="timer"> 10 </div>
+<!--        enemy health-->
+        <div class="overlay-parent">
+            <div  class="health-bar"></div>
+            <div id="enemyHealth" class="overlay"></div>
+        </div>
+    </div>
+    <div class="label" id="result">TIE</div>
+    <canvas></canvas>
+</div>
+
+
+<script src="js/utils.js"></script>
+<script src="js/sprite.js"></script>
+<script src="js/fighter.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
