@@ -25,7 +25,7 @@ function detectCollisionAndDetermineWinner(player, enemy, timerId) {
         player.health -= enemy.damage;
         document.querySelector("#playerHealth").style.width = `${player.health}%`;
     }
-    if(player.health <=0 || enemy.health <= 0){
+    if (player.health <= 0 || enemy.health <= 0) {
         determineWinner(player, enemy, timerId);
     }
 }
@@ -39,4 +39,11 @@ function determineWinner(player, enemy, timerId) {
         document.querySelector("#result").innerHTML = 'Player 2 Wins';
     }
     clearTimeout(timerId);
+}
+function faceEnemy(player, enemy) {
+    // if enemy is left of player and player and player attack box is facing right and enemy attack box is facing left
+    if (enemy.position.x < player.position.x) {
+        player.attackBox.offset.x = -50;
+        enemy.attackBox.offset.x = 0;
+    }
 }

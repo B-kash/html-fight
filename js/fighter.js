@@ -1,12 +1,18 @@
+const GROUND_HEIGHT = 95;
 class Fighter {
     constructor({
-                    position,
-                    velocity,
-                    height,
-                    width,
-                    color = 'red',
-                    offset
-                }) {
+        position,
+        velocity,
+        height,
+        width,
+        color = 'red',
+        offset,
+        useSprite,
+        scale,
+        maxFrames,
+        holdFrames,
+        assetsDir
+    }) {
         this.position = position;
         this.velocity = velocity;
         this.height = height;
@@ -23,6 +29,13 @@ class Fighter {
         }
         this.color = color
         this.isAttacking = false;
+
+        this.useSprite = useSprite;
+        this.scale = scale;
+        this.maxFrames = maxFrames;
+        this.holdFrames = holdFrames;
+        this.assets = assetsDir;
+
         this.health = 100;
         this.damage = 20;
     }
@@ -41,11 +54,22 @@ class Fighter {
 
     update() {
         this.draw();
+
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
         this.attackBox.position.y = this.position.y;
 
-        this.position.x += this.velocity.x;
+        // move fighter
+
+        // Dont let fighter move off screen
+        if (this.position.x + this.velocity.x <= 0) {
+            this.position.x = 0;
+        } else if (this.position.x + this.width + this.velocity.x >= canvas.width) {
+            this.position.x = canvas.width - this.width;
+        } else {
+            this.position.x += this.velocity.x;
+        }
         this.position.y += this.velocity.y;
+
         if (this.isOnGround()) {
             this.velocity.y = 0;
         } else {
@@ -54,7 +78,7 @@ class Fighter {
     }
 
     isOnGround() {
-        return this.position.y + this.height + this.velocity.y >= canvas.height - 96;
+        return this.position.y + this.height + this.velocity.y >= canvas.height - GROUND_HEIGHT;
     }
 
     attack() {

@@ -32,7 +32,7 @@ const shop = new Sprite({
 
 const player = new Fighter({
     position: {
-        x: 0,
+        x: (canvas.width) / 10,
         y: 0,
     },
     velocity: {
@@ -44,12 +44,18 @@ const player = new Fighter({
     offset: {
         x: 0,
         y: 0
-    }
+    },
+
+    useSprite: false,
+    scale: 2.75,
+    maxFrames: 6,
+    holdFrames: 5,
+    assetsDir: './img/samuraiMack'
 });
 const enemy = new Fighter({
     position: {
-        x: 500,
-        y: 100,
+        x: canvas.width - ((canvas.width) / 10) - 50,
+        y: 0,
     },
     velocity: {
         x: 0,
@@ -61,7 +67,14 @@ const enemy = new Fighter({
     offset: {
         x: -50,
         y: 0
-    }
+    },
+
+    useSprite: false,
+
+    scale: 2.75,
+    maxFrames: 6,
+    holdFrames: 5,
+    assetsDir: './img/kenji'
 });
 
 const KEYS = {
@@ -127,6 +140,7 @@ function animate() {
     ctx.fillRect(0, 0, canvas.width, canvas.height)
     background.update();
     shop.update();
+    faceEnemy(player, enemy);
     player.update();
     enemy.update();
     movePlayers(player, enemy);

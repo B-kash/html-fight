@@ -39,7 +39,7 @@
 }
 .player-overlay{
     position: absolute;
-    background-color: blue;
+    background-color: red;
     top:0;
     right:0;
     bottom: 0;
